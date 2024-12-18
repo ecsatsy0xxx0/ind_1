@@ -1,0 +1,263 @@
+import java.util.*;
+
+class Money{
+    private double money1, money2;
+
+    Money(double money1, double money2){
+        this.money1 = money1;
+        this.money2 = money2;
+    }
+
+    double Sum(double money1, double money2){
+        return money1 + money2;
+    }
+
+    double Subt(double money1, double money2){
+        return Math.abs(money1 - money2);
+    }
+
+    String Sr(double money1, double money2){
+        if (money1 > money2){
+            return "Первая денежная сумма больше второй";
+        }
+        else if (money2 < money1){
+            return "Вторая денежная сумма больше первой";
+        }
+        else{
+            return "Суммы равны";
+        }
+    }
+
+    double Mult(double money1, double money2, double x, int v){
+        if (v == 1){
+            return money1*x;
+        }
+        else if (v == 2){
+            return money2*x;
+        }
+        else{
+            return 0;
+        }
+    }
+
+}
+
+public class Main{
+    public static void main(String[] args){
+        double x, money1, money2;
+        int v;
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Введите первую денежную сумму: ");
+        money1 = sc.nextDouble();
+        System.out.print("Введите вторую денежную сумму: ");
+        money2 = sc.nextDouble();
+
+        if (money1 < 0 || money2 < 0){
+            System.out.println("Введите положительную сумму!!!");
+            System.out.println();
+            returnMenu_1();
+        }
+        else{
+            Menu(money1, money2);
+        }
+    }
+
+    private static void displayMenu() {
+        System.out.println("--------------------------------------------------------------");
+        System.out.println("Выбери один пункт из списка, представленного ниже");
+        System.out.println("1. Найти сумму двух денежных сумм");
+        System.out.println("2. Найти разницу двух денежных сумм");
+        System.out.println("3. Сравнить две суммы");
+        System.out.println("4. Умножить на определённое число одну из сумм");
+        System.out.println("5. Exit");
+        System.out.print("Ваш выбор: ");
+    }
+
+    private static void returnMenu_1(){
+        double money1, money2;
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Введите первую денежную сумму: ");
+        money1 = sc.nextDouble();
+        System.out.print("Введите вторую денежную сумму: ");
+        money2 = sc.nextDouble();
+
+        if (money1 < 0 || money2 < 0){
+            System.out.println("Введите положительную сумму!!!");
+            System.out.println();
+            returnMenu_1();
+        }
+        else{
+            Menu(money1, money2);
+        }
+    }
+
+    private static void Menu(double money1, double money2) {
+        double x;
+        int v;
+        Scanner sc = new Scanner(System.in);
+
+        Money mn = new Money(money1, money2);
+        displayMenu();
+        int r = sc.nextInt();
+        System.out.println("--------------------------------------------------------------");
+
+        if (r >= 1 && r <= 5){
+            switch (r){
+                case 1:
+                    System.out.println("Cумма двух денежнных сумм: " + mn.Sum(money1, money2));
+                    break;
+                case 2:
+                    System.out.println("Разница двух денежнных сумм: " + mn.Subt(money1, money2));
+                    break;
+                case 3:
+                    System.out.println(mn.Sr(money1, money2));
+                    break;
+                case 4:
+                    System.out.print("Введи число на которое нужно умножить: ");
+                    x = sc.nextDouble();
+                    if (x > 0) {
+                        Menu_1(money2, money1, x);
+                    }
+                    else{
+                        returnMenu_3(money1, money2);
+                    }
+                    break;
+                case 5:
+                    return;
+            }
+            returnManu_2(money1, money2);
+        }
+        else{
+            System.out.println("Введите от одного до пяти!");
+            returnManu_2(money1, money2);
+        }
+    }
+
+    private static void returnManu_2(double money1, double money2){
+        double x;
+        int v;
+        Scanner sc = new Scanner(System.in);
+
+        Money mn = new Money(money1, money2);
+        displayMenu();
+        int r = sc.nextInt();
+        System.out.println("--------------------------------------------------------------");
+
+        if (r >= 1 && r <= 5){
+            switch (r){
+                case 1:
+                    System.out.println("Cумма двух денежнных сумм: " + mn.Sum(money1, money2));
+                    break;
+                case 2:
+                    System.out.println("Разница двух денежнных сумм: " + mn.Subt(money1, money2));
+                    break;
+                case 3:
+                    System.out.println(mn.Sr(money1, money2));
+                    break;
+                case 4:
+                    System.out.print("Введи число на которое нужно умножить: ");
+                    x = sc.nextDouble();
+                    if (x > 0) {
+                        Menu_1(money2, money1, x);
+                    }
+                    else{
+                        returnMenu_3(money1, money2);
+                    }
+                    break;
+                case 5:
+                    return;
+            }
+            returnManu_2(money1, money2);
+        }
+        else{
+            System.out.println("Введите от одного до пяти!");
+            returnManu_2(money1, money2);
+        }
+    }
+
+    private static void returnMenu_3(double money1, double money2){
+        double x;
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Введи положительно число!!!");
+        System.out.println();
+        System.out.print("Введи число на которое нужно умножить: ");
+        x = sc.nextDouble();
+        if (x > 0) {
+            Menu_1(money2, money1, x);
+        }
+        else{
+            returnMenu_3(money1, money2);
+        }
+    }
+
+    private static void returnMenu_4(double money1, double money2, double x){
+        System.out.println("--------------------------------------------------------------");
+        System.out.println("Введи от однго до трёх!!!");
+        System.out.println("--------------------------------------------------------------");
+
+        int v;
+        Scanner sc = new Scanner(System.in);
+        Money mn = new Money(money1, money2);
+
+        System.out.println("Выбери пункт, который хочешь выполнить");
+        System.out.println("1. Умножить на первую сумму");
+        System.out.println("2. Умножить на вторую сумму");
+        System.out.println("3. Exit");
+        System.out.print("Ваш выбор: "); v = sc.nextInt();
+
+        if (v >= 1 && v <= 3){
+            switch (v){
+                case 1:
+                    money1 = mn.Mult(money1, money2, x, v);
+                    System.out.println(mn.Mult(money1, money2, x, v));
+                    break;
+                case 2:
+                    money2 = mn.Mult(money1, money2, x, v);
+                    System.out.println(mn.Mult(money1, money2, x, v));
+                    break;
+                case 3:
+                    return;
+            }
+            Menu_1(money2, money1, x);
+        }
+        else{
+            returnMenu_4(money1, money2, x);
+        }
+    }
+
+    private static void Menu_1(double money2, double money1, double x){
+        int v;
+        Scanner sc = new Scanner(System.in);
+        Money mn = new Money(money1, money2);
+
+        System.out.println("Выбери пункт, который хочешь выполнить");
+        System.out.println("1. Умножить на первую сумму");
+        System.out.println("2. Умножить на вторую сумму");
+        System.out.println("3. Exit");
+        System.out.print("Ваш выбор: "); v = sc.nextInt();
+
+        if (v >= 1 && v <= 3){
+            switch (v){
+                case 1:
+                    money1 = mn.Mult(money1, money2, x, v);
+                    System.out.println(mn.Mult(money1, money2, x, v));
+                    break;
+                case 2:
+                    money2 = mn.Mult(money1, money2, x, v);
+                    System.out.println(mn.Mult(money1, money2, x, v));
+                    break;
+                case 3:
+                    return;
+            }
+            Menu_1(money2, money1, x);
+        }
+        else{
+            returnMenu_4(money1, money2, x);
+        }
+
+    }
+
+}

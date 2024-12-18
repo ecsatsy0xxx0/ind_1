@@ -1,0 +1,231 @@
+import java.util.*;
+
+class Car{
+    String mark; double pow, vol;
+
+    Car(String mark, double pow, double vol) {
+        this.mark = mark;
+        this.pow = pow;
+        this.vol = vol;
+    }
+
+    void chMark(String mark) {
+        this.mark = mark;
+    }
+
+    void chPow(double pow) {
+        this.pow = pow;
+    }
+
+    void chVol(double vol) {
+        this.vol = vol;
+    }
+
+    void toString(String mark, double pow, double vol){
+        System.out.println("Марка автомобиля: " + mark);
+        System.out.println("Мощность двигателя автомобиля: " + vol);
+        System.out.println("Объём двигателя автомобиля: " + pow);
+    }
+}
+
+class eCar extends Car{
+    int place;
+
+
+    eCar(String mark, double pow, double vol, int place) {
+        super(mark, pow, vol);
+        this.place = place;
+    }
+
+    void chPlace(int place) {
+        this.place = place;
+    }
+
+    void toString(int place){
+        super.toString(mark, pow, vol);
+        System.out.println("Кол-во мест: " + place);
+    }
+}
+
+public class Main {
+    public static void main(String[] args){
+        double pow, vol; String mark; int place, rp;
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Введите марку автомобиля: ");
+        mark = sc.nextLine();
+        System.out.print("Введите мощность двигателя: ");
+        pow = sc.nextDouble();
+        System.out.print("Введите объём двигателя: ");
+        vol = sc.nextDouble();
+        while (vol < 0){
+            System.out.println("----------------------------------------------");
+            System.out.println("Введите положительный объём двигателя!!!");
+            System.out.println("----------------------------------------------");
+            System.out.print("Введите объём двигателя: ");
+            vol = sc.nextDouble();
+        }
+        Car cr = new Car(mark, vol, pow);
+
+        System.out.print("Введите кол-во мест: ");
+        place = sc.nextInt();
+        while (place < 0){
+            System.out.println("----------------------------------------------");
+            System.out.println("Введите положительное кол-во мест!!!");
+            System.out.println("----------------------------------------------");
+            System.out.print("Введите кол-во мест: ");
+            place = sc.nextInt();
+        }
+        eCar car = new eCar(mark, vol, pow, place);
+
+        Menu();
+        System.out.print("Твой выбор: "); rp = sc.nextInt();
+        System.out.println("----------------------------------------------");
+        while (rp < 1 || rp > 5){
+            Menu();
+            System.out.print("Твой выбор: "); rp = sc.nextInt();
+            System.out.println("----------------------------------------------");
+        }
+
+        switch (rp){
+            case 1:
+                cr.toString(mark, vol, pow);
+                Menu_2(mark, pow, vol, place);
+                break;
+            case 2:
+                car.toString(place);
+                Menu_2(mark, pow, vol, place);
+                break;
+            case 3:
+                Menu_3(mark, pow, vol, place);
+                break;
+            case 4:
+                Menu_4(mark, pow, vol, place);
+                break;
+            case 5:
+                return;
+        }
+    }
+
+    public static void Menu(){
+        System.out.println("----------------------------------------------");
+        System.out.println("Выбери от одного до пяти");
+        System.out.println("----------------------------------------------");
+        System.out.println("1. Посмотреть данные машины");
+        System.out.println("2. Посмотреть данные легковой машины");
+        System.out.println("3. Изменить данные машины");
+        System.out.println("4. Изменить данные легковой машины");
+        System.out.println("5. exit");
+        System.out.println("----------------------------------------------");
+    }
+
+    public static void Menu_2(String mark, double pow, double vol, int place){
+        int rp; Scanner sc = new Scanner(System.in);
+        Car cr = new Car(mark, vol, pow);
+        eCar car = new eCar(mark, vol, pow, place);
+        Menu();
+        System.out.print("Твой выбор: "); rp = sc.nextInt();
+        System.out.println("----------------------------------------------");
+        while (rp < 1 || rp > 5){
+            Menu();
+            System.out.print("Твой выбор: "); rp = sc.nextInt();
+            System.out.println("----------------------------------------------");
+        }
+
+        switch (rp){
+            case 1:
+                cr.toString(mark, vol, pow);
+                Menu_2(mark, pow, vol, place);
+                break;
+            case 2:
+                car.toString(place);
+                Menu_2(mark, pow, vol, place);
+                break;
+            case 3:
+                Menu_3(mark, pow, vol, place);
+                break;
+            case 4:
+                Menu_4(mark, pow, vol, place);
+                break;
+            case 5:
+                return;
+        }
+    }
+
+    public static void Menu_3(String mark, double pow, double vol, int place){
+        Car cr = new Car(mark, vol, pow);
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Выбери что ты хочешь изменить: ");
+        System.out.println("1. Марку автомобиля");
+        System.out.println("2. Мощность двигателя");
+        System.out.println("3. Объём двигателя");
+        System.out.println("4. exit");
+        System.out.println("----------------------------------------------");
+        System.out.print("Твой выбор: ");
+        int z = sc.nextInt();
+        System.out.println("----------------------------------------------");
+        while(z < 1 || z > 4){
+            System.out.println("Выбери от одного до четырёх!!!");
+            System.out.println("----------------------------------------------");
+            System.out.print("Твой выбор: ");
+            z = sc.nextInt();
+            System.out.println("----------------------------------------------");
+        }
+
+        switch (z){
+            case 1:
+                System.out.println("Введите новую марку автомобиля: ");
+                mark = sc.nextLine();
+                while (mark.trim().isEmpty()) {
+                    System.out.println("----------------------------------------------");
+                    System.out.println("Марка автомобиля не может быть пустой!!!");
+                    System.out.println("----------------------------------------------");
+                    System.out.print("Введите марку автомобиля: ");
+                    mark = sc.nextLine();
+                }
+                cr.chMark(mark);
+                Menu_3(mark, pow, vol, place);
+                break;
+            case 2:
+                System.out.print("Введи новую мощность авто: ");
+                pow = sc.nextDouble();
+                cr.chPow(pow);
+                Menu_3(mark, pow, vol, place);
+                break;
+            case 3:
+                System.out.print("Введи новый объём двигателя авто: ");
+                vol = sc.nextDouble();
+                while (vol < 0){
+                    System.out.println("----------------------------------------------");
+                    System.out.println("Введите положительный объём двигателя!!!");
+                    System.out.println("----------------------------------------------");
+                    System.out.print("Введите объём двигателя: ");
+                    vol = sc.nextDouble();
+                }
+                cr.chVol(vol);
+                Menu_3(mark, pow, vol, place);
+                break;
+            case 4:
+                Menu_2(mark, pow, vol, place);
+        }
+
+    }
+
+    public static void Menu_4(String mark, double pow, double vol, int place){
+        eCar car = new eCar(mark, vol, pow, place);
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Введи новое количество мест: ");
+        place = sc.nextInt();
+        while (place < 0){
+            System.out.println("----------------------------------------------");
+            System.out.println("Введите положительное кол-во мест!!!");
+            System.out.println("----------------------------------------------");
+            System.out.print("Введите кол-во мест: ");
+            place = sc.nextInt();
+        }
+        car.chPlace(place);
+        Menu_2(mark, pow, vol, place);
+    }
+}
+
